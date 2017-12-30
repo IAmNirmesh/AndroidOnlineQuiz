@@ -2,6 +2,7 @@ package rahul.nirmesh.onlinequiz;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -63,8 +64,13 @@ public class MainActivity extends AppCompatActivity {
                 if (dataSnapshot.child(username).exists()) {
                     if (!username.isEmpty()) {
                         User login = dataSnapshot.child(username).getValue(User.class);
-                        if (login.getPassword().equals(password))
+                        if (login.getPassword().equals(password)) {
                             Toast.makeText(MainActivity.this, "Login OK!", Toast.LENGTH_SHORT).show();
+
+                            Intent homeActivity = new Intent(MainActivity.this, Home.class);
+                            startActivity(homeActivity);
+                            finish();
+                        }
                         else
                             Toast.makeText(MainActivity.this, "Wrong Credentials!", Toast.LENGTH_SHORT).show();
                     } else {
