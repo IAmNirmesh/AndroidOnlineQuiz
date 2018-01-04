@@ -17,6 +17,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.rengwuxian.materialedittext.MaterialEditText;
 
+import rahul.nirmesh.onlinequiz.common.Common;
 import rahul.nirmesh.onlinequiz.model.User;
 
 public class MainActivity extends AppCompatActivity {
@@ -68,6 +69,7 @@ public class MainActivity extends AppCompatActivity {
                             Toast.makeText(MainActivity.this, "Login OK!", Toast.LENGTH_SHORT).show();
 
                             Intent homeActivity = new Intent(MainActivity.this, Home.class);
+                            Common.currentUser = login;
                             startActivity(homeActivity);
                             finish();
                         }

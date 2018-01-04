@@ -1,5 +1,6 @@
 package rahul.nirmesh.onlinequiz;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -16,6 +17,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
 
 import rahul.nirmesh.onlinequiz.Interface.ItemClickListener;
+import rahul.nirmesh.onlinequiz.common.Common;
 import rahul.nirmesh.onlinequiz.model.Category;
 import rahul.nirmesh.onlinequiz.viewHolder.CategoryViewHolder;
 
@@ -74,7 +76,10 @@ public class CategoryFragment extends Fragment {
                 viewHolder.setItemClickListener(new ItemClickListener() {
                     @Override
                     public void onClick(View view, int position, boolean isLongClick) {
-                        Toast.makeText(getActivity(), String.format("%s|%s", adapter.getRef(position), model.getName()), Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(getActivity(), String.format("%s|%s", adapter.getRef(position), model.getName()), Toast.LENGTH_SHORT).show();
+                        Intent startGame = new Intent(getActivity(), Start.class);
+                        Common.categoryId = adapter.getRef(position).getKey();
+                        startActivity(startGame);
                     }
                 });
             }
