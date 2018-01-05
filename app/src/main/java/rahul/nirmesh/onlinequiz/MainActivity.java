@@ -1,6 +1,8 @@
 package rahul.nirmesh.onlinequiz;
 
+import android.app.AlarmManager;
 import android.app.AlertDialog;
+import android.app.PendingIntent;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -17,6 +19,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.rengwuxian.materialedittext.MaterialEditText;
 
+import java.util.Calendar;
+
+import rahul.nirmesh.onlinequiz.BroadcastReceiver.AlarmReceiver;
 import rahul.nirmesh.onlinequiz.common.Common;
 import rahul.nirmesh.onlinequiz.model.User;
 
@@ -33,6 +38,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        registerAlarm();
 
         database = FirebaseDatabase.getInstance();
         users = database.getReference("Users");
@@ -56,6 +63,19 @@ public class MainActivity extends AppCompatActivity {
                 signIn(editUserName.getText().toString(), editPassword.getText().toString());
             }
         });
+    }
+
+    private void registerAlarm() {
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.HOUR_OF_DAY, 14);
+        calendar.set(Calendar.MINUTE, 04);
+        calendar.set(Calendar.SECOND, 0);
+
+        Intent receiverIntent = new Intent(MainActivity.this, AlarmReceiver.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(MainActivity.this, 0, receiverIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        AlarmManager alarmManager = (AlarmManager) this.getSystemService(this.ALARM_SERVICE);
+        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);
     }
 
     private void signIn(final String username, final String password) {

@@ -16,11 +16,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <receiver android:name=".BroadcastReceiver.AlarmReceiver" />
         <activity android:name=".Home" />
         <activity android:name=".Start" />
         <activity android:name=".Playing" />
         <activity android:name=".Done" />
-        <activity android:name=".ScoreDetail"></activity>
+        <activity android:name=".ScoreDetail" />
     </application>
 
 </manifest>
