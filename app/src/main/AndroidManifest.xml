@@ -22,6 +22,18 @@
         <activity android:name=".Playing" />
         <activity android:name=".Done" />
         <activity android:name=".ScoreDetail" />
+
+        <service android:name=".BroadcastReceiver.QuizFirebaseIdService">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
+            </intent-filter>
+        </service>
+
+        <service android:name=".BroadcastReceiver.QuizFirebaseMessagingService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
     </application>
 
 </manifest>
